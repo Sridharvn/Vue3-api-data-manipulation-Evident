@@ -1,13 +1,32 @@
 <template>
   <div>
-    <home-page></home-page>
     <!-- {{ data }} -->
-    <div v-for="result in data.results" :key="result.id.value">{{ result.name.first }}</div>
+    <table>
+      <thead>
+        <th>slno.</th>
+        <th>name</th>
+        <th>DOB</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Phone</th>
+        <th>Picture</th>
+      </thead>
+      <tbody>
+        <tr v-for="(result, index) in data.results" :key="result.id.value">
+          <td>{{ index + 1 }}</td>
+          <td>{{ result.name.title }}. {{ result.name.first }} {{ result.name.last }}</td>
+          <td>{{ result.dob.date }}</td>
+          <td>{{ result.email }}</td>
+          <td>{{ result.location.city }}</td>
+          <td>{{ result.phone }}</td>
+          <td>{{ result.picture.large }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 <script lang="ts" setup>
 import axios from 'axios'
-import HomePage from './views/HomePage.vue'
 import { Convert, RandomUserData } from './utils/randomUserData'
 import { onMounted, reactive, ref } from 'vue'
 var data = ref<RandomUserData>({
