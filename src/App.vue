@@ -14,15 +14,24 @@
         </thead>
         <tbody class="table-body-wrapper">
           <tr v-for="(result, index) in data.results" :key="result.id.value" class="table-row">
+            <td class="table-cell">{{ index + 1 }}</td>
             <td class="table-cell">
               {{ result.name.title }}. {{ result.name.first }} {{ result.name.last }}
             </td>
-            <td class="table-cell">{{ index + 1 }}</td>
-            <td class="table-cell">{{ result.dob.date }}</td>
+            <td class="table-cell">
+              <!-- {{ result.dob.date }} -->
+
+              {{ getDOB(result.dob.date) }}
+            </td>
             <td class="table-cell">{{ result.email }}</td>
-            <td class="table-cell">{{ result.location.country }}</td>
+            <td class="table-cell">
+              {{ result.location.country }}
+            </td>
             <td class="table-cell">{{ result.phone }}</td>
-            <td class="table-cell">{{ result.picture.large }}</td>
+            <td class="table-cell">
+              <img :src="result.picture.large" alt="" />
+              <!-- {{ result.picture.large }} -->
+            </td>
           </tr>
         </tbody>
       </table>
@@ -45,14 +54,24 @@ async function getData() {
     k++
   })
 }
+function getDOB(url) {
+  var timeStr = url
+  var date = new Date(timeStr)
+  var day = date.getDate()
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var dateStr = month + '/' + day + '/' + year
+  return dateStr
+}
+async function getLocation(url) {}
 onMounted(() => {
   getData()
 })
 </script>
 <style scoped>
 .main {
-  background: #e4e4e4;
-  color: rgb(112, 112, 112);
+  /* background: #e4e4e4; */
+  /* color: rgb(112, 112, 112); */
   box-sizing: border-box;
   padding: 0;
   margin: 0;
