@@ -1,28 +1,32 @@
 <template>
-  <div>
+  <div class="main">
     <!-- {{ data }} -->
-    <table>
-      <thead>
-        <th>slno.</th>
-        <th>name</th>
-        <th>DOB</th>
-        <th>Email</th>
-        <th>Location</th>
-        <th>Phone</th>
-        <th>Picture</th>
-      </thead>
-      <tbody>
-        <tr v-for="(result, index) in data.results" :key="result.id.value">
-          <td>{{ index + 1 }}</td>
-          <td>{{ result.name.title }}. {{ result.name.first }} {{ result.name.last }}</td>
-          <td>{{ result.dob.date }}</td>
-          <td>{{ result.email }}</td>
-          <td>{{ result.location.city }}</td>
-          <td>{{ result.phone }}</td>
-          <td>{{ result.picture.large }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table>
+        <thead class="table-header-wrapper">
+          <th class="table-header">slno.</th>
+          <th class="table-header">name</th>
+          <th class="table-header">DOB</th>
+          <th class="table-header">Email</th>
+          <th class="table-header">Location</th>
+          <th class="table-header">Phone</th>
+          <th class="table-header">Picture</th>
+        </thead>
+        <tbody class="table-body-wrapper">
+          <tr v-for="(result, index) in data.results" :key="result.id.value" class="table-row">
+            <td class="table-cell">
+              {{ result.name.title }}. {{ result.name.first }} {{ result.name.last }}
+            </td>
+            <td class="table-cell">{{ index + 1 }}</td>
+            <td class="table-cell">{{ result.dob.date }}</td>
+            <td class="table-cell">{{ result.email }}</td>
+            <td class="table-cell">{{ result.location.country }}</td>
+            <td class="table-cell">{{ result.phone }}</td>
+            <td class="table-cell">{{ result.picture.large }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -45,3 +49,40 @@ onMounted(() => {
   getData()
 })
 </script>
+<style scoped>
+.main {
+  background: #e4e4e4;
+  color: rgb(112, 112, 112);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+table {
+  /* border: 1px solid white; */
+}
+tr,
+thead {
+  /* border-bottom: 1px solid white; */
+}
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.table-header-wrapper {
+  /* border-bottom: 1px soid white; */
+}
+.table-header {
+}
+.table-body-wrapper {
+}
+.table-row {
+}
+.table-cell {
+  /* border: 1px solid white; */
+  padding: 10px;
+  text-align: center;
+}
+</style>
